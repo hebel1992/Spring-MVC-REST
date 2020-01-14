@@ -51,6 +51,6 @@ public class BookController {
 
     @DeleteMapping(value = "/deleteBook/{id}")
     public Book removeBook(@PathVariable Integer id) {
-        return memoryBookService.deleteElement(id);
+        return memoryBookService.deleteElemenet(id);
     }
 }

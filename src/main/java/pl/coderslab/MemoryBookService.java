@@ -46,7 +46,7 @@ public class MemoryBookService implements BookService<Book, Integer> {
     public Book updateElement(Book book) {
         Book existingBook = getOneElement(book.getId());
         if (existingBook != null) {
-            list.set(existingBook.getId() - 1, book);
+            list.set(list.indexOf(existingBook), book);
         }
         return book;
     }
@@ -56,7 +56,8 @@ public class MemoryBookService implements BookService<Book, Integer> {
         Book book = getOneElement(id);
         if (book != null) {
             list.remove(book);
+            return book;
         }
-        return book;
+        return null;
     }
 }
