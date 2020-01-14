@@ -29,20 +29,28 @@ public class BookController {
 
     @GetMapping("/")
     public List<Book> allBooks() {
-        List<Book> books = memoryBookService.getList();
+        List<Book> books = memoryBookService.getAllElements();
         return books;
-    }
-
-    //book sent from postman and saved in books
-    @PostMapping(value = "/addBook")
-    @ResponseBody
-    public Book book(@RequestBody Book book) {
-        memoryBookService.addBook(book);
-        return book;
     }
 
     @GetMapping("/{id}")
     public Book book(@PathVariable Integer id) {
-        return memoryBookService.getBook(id);
+        return memoryBookService.getOneElement(id);
+    }
+
+    @PostMapping(value = "/addBook")
+    @ResponseBody
+    public Book addBook(@RequestBody Book book) {
+        return memoryBookService.addElement(book);
+    }
+
+    @PutMapping("/updateBook")
+    public Book updateBook(@RequestBody Book book) {
+        return memoryBookService.updateElement(book);
+    }
+
+    @DeleteMapping(value = "/deleteBook/{id}")
+    public Book removeBook(@PathVariable Integer id) {
+        return memoryBookService.deleteElement(id);
     }
 }

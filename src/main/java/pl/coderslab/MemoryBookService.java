@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemoryBookService {
@@ -19,25 +20,40 @@ public class MemoryBookService {
                 "Cay Horstmann, Gary Cornell", "Helion", "programming"));
     }
 
-    public List<Book> getList() {
+    public List<Book> getAllElements() {
         return list;
     }
 
-    public void setList(List<Book> list) {
-        this.list = list;
+    public Book getOneElement(Integer id) {
+        Optional<Book> book = list.stream()
+                .filter(e -> e.getId() == id)
+                .findAny();
+        if (book.isPresent()) {
+            return book.get();
+        }
+        return null;
     }
 
-    public Book getBook(Integer id) {
-        Book book = null;
-        for (Book b : list) {
-            if (b.getId() == id) {
-                book = b;
-            }
+    public Book addElement(Book book) {
+        list.add(book);
+        return book;
+    }
+
+    public Book updateElement(Book book) {
+        Book existingBook = getOneElement(book.getId());
+        if (existingBook != null) {
+            list.set(existingBook.getId() - 1, book);
         }
         return book;
     }
 
-    public void addBook(Book book) {
-        list.add(book);
+    public Book deleteElement(Integer id) {
+        Book book = getOneElement(id);
+        if (book != null) {
+            list.remove(book);
+        }
+        return book;
     }
+
+
 }
