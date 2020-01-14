@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MemoryBookService {
+public class MemoryBookService implements BookService<Book, Integer> {
     private List<Book> list;
 
     public MemoryBookService() {
@@ -20,10 +20,12 @@ public class MemoryBookService {
                 "Cay Horstmann, Gary Cornell", "Helion", "programming"));
     }
 
+    @Override
     public List<Book> getAllElements() {
         return list;
     }
 
+    @Override
     public Book getOneElement(Integer id) {
         Optional<Book> book = list.stream()
                 .filter(e -> e.getId() == id)
@@ -34,11 +36,13 @@ public class MemoryBookService {
         return null;
     }
 
+    @Override
     public Book addElement(Book book) {
         list.add(book);
         return book;
     }
 
+    @Override
     public Book updateElement(Book book) {
         Book existingBook = getOneElement(book.getId());
         if (existingBook != null) {
@@ -47,13 +51,12 @@ public class MemoryBookService {
         return book;
     }
 
-    public Book deleteElement(Integer id) {
+    @Override
+    public Book deleteElemenet(Integer id) {
         Book book = getOneElement(id);
         if (book != null) {
             list.remove(book);
         }
         return book;
     }
-
-
 }
