@@ -1,6 +1,7 @@
-package pl.coderslab;
+package pl.coderslab.repositories;
 
 import org.springframework.stereotype.Service;
+import pl.coderslab.models.Book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class MemoryBookService implements BookService<Book, Integer> {
     }
 
     @Override
-    public Book deleteElemenet(Integer id) {
+    public Book deleteElement(Integer id) {
         Book book = getOneElement(id);
         if (book != null) {
             list.remove(book);

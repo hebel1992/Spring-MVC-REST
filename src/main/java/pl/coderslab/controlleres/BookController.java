@@ -1,6 +1,8 @@
-package pl.coderslab;
+package pl.coderslab.controlleres;
 
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.repositories.MemoryBookService;
+import pl.coderslab.models.Book;
 
 import java.util.List;
 
@@ -16,11 +18,6 @@ public class BookController {
     }
 
     //test method
-    @GetMapping("/hello")
-    public String hello() {
-        return "{hello: World}";
-    }
-
     @GetMapping("/helloBook")
     public Book helloBook() {
         return new Book(1, "9788324631766", "Thinking in Java",
@@ -51,6 +48,6 @@ public class BookController {
 
     @DeleteMapping(value = "/deleteBook/{id}")
     public Book removeBook(@PathVariable Integer id) {
-        return memoryBookService.deleteElemenet(id);
+        return memoryBookService.deleteElement(id);
     }
 }

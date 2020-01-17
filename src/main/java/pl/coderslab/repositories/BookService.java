@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.repositories;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ public interface BookService<T, S extends Number> {
 
     public T updateElement(T t);
 
-    public T deleteElemenet(S s);
+    public T deleteElement(S s);
 }
