@@ -36,7 +36,6 @@ public class BookController {
     }
 
     @PostMapping(value = "/addBook")
-    @ResponseBody
     public Book addBook(@RequestBody Book book) {
         return memoryBookService.addElement(book);
     }
